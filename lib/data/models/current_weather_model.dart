@@ -17,7 +17,6 @@ class Current extends Equatable {
     required this.visibility,
     required this.windSpeed,
     required this.windDeg,
-    required this.windGust,
     required this.weather,
     this.pop,
   });
@@ -35,7 +34,6 @@ class Current extends Equatable {
   final int visibility;
   final double windSpeed;
   final int windDeg;
-  final double windGust;
   final List<Weather> weather;
   final double? pop;
 
@@ -53,7 +51,6 @@ class Current extends Equatable {
         visibility: json["visibility"],
         windSpeed: json["wind_speed"]?.toDouble(),
         windDeg: json["wind_deg"],
-        windGust: json["wind_gust"]?.toDouble(),
         weather:
             List<Weather>.from(json["weather"].map((x) => Weather.fromJson(x))),
         pop: json["pop"]?.toDouble(),
@@ -73,7 +70,6 @@ class Current extends Equatable {
         "visibility": visibility,
         "wind_speed": windSpeed,
         "wind_deg": windDeg,
-        "wind_gust": windGust,
         "weather": List<dynamic>.from(weather.map((x) => x.toJson())),
         "pop": pop,
       };
@@ -93,7 +89,6 @@ class Current extends Equatable {
         visibility,
         windSpeed,
         windDeg,
-        windGust,
         weather,
         pop
       ];
@@ -112,7 +107,6 @@ CurrentEntity mapCurrenttoEntity(Current current) {
     visibility: current.visibility,
     windSpeed: current.windSpeed,
     windDeg: current.windDeg,
-    windGust: current.windGust,
     weather:
         current.weather.map((e) => mapWeatherMainModelToEntitiy(e)).toList(),
   );

@@ -20,7 +20,7 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
   Future<WeatherModel> getWeather(double lat, double lon) async {
     
     final response = await client.get(
-      Uri.parse('$URL/onecall?lat=$lat&lon=$lon&exclude=minutely&appid=$APP_ID'));
+      Uri.parse('$URL/onecall?lat=$lat&lon=$lon&units=metric&exclude=minutely&appid=$APP_ID'));
 
     if (response.statusCode == 200) {
       return WeatherModel.fromJson(json.decode(response.body));

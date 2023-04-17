@@ -16,7 +16,6 @@ class CurrentEntity extends Equatable {
     required this.visibility,
     required this.windSpeed,
     required this.windDeg,
-    required this.windGust,
     required this.weather,
     this.pop,
   });
@@ -34,7 +33,6 @@ class CurrentEntity extends Equatable {
   final int visibility;
   final double windSpeed;
   final int windDeg;
-  final double windGust;
   final List<WeatherMain> weather;
   final double? pop;
 
@@ -53,7 +51,6 @@ class CurrentEntity extends Equatable {
         visibility,
         windSpeed,
         windDeg,
-        windGust,
         weather,
         pop
       ];
