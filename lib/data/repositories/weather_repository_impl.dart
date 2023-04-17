@@ -18,6 +18,8 @@ class WeatherRepositoryImpl implements WeatherRepository {
       return Right(mapWeatherModeltoEntity(result));
     } on ServerException {
       return Left(ServerFailure(''));
+    } on ConnectionFailure {
+      return Left(ConnectionFailure(''));
     }
   }
 }
