@@ -16,8 +16,10 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context.read<WeatherBloc>().add(const LoadWeatherData()));
-    Future.microtask(() => context.read<LocationBloc>().add(FetchLocationName())); 
+    Future.microtask(
+        () => context.read<WeatherBloc>().add(const LoadWeatherData()));
+    Future.microtask(
+        () => context.read<LocationBloc>().add(FetchLocationName()));
   }
 
   @override
@@ -25,13 +27,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: const Color(0xff11103a),
       body: SingleChildScrollView(
-        child: BlocBuilder<WeatherBloc, WeatherState>(builder: (context, state) {
+        child:
+            BlocBuilder<WeatherBloc, WeatherState>(builder: (context, state) {
           if (state is WeatherLoading) {
             return Container(
-              alignment: Alignment.center,
-              height: MediaQuery.of(context).size.height,
-              child: const CircularProgressIndicator()
-              );
+                alignment: Alignment.center,
+                height: MediaQuery.of(context).size.height,
+                child: const CircularProgressIndicator());
           } else if (state is WeatherHasData) {
             final data = state.weatherEntity;
             return CurrentWeather(data);

@@ -137,50 +137,49 @@ class CurrentWeather extends StatelessWidget {
                 children: [
                   const SizedBox(height: 20),
                   const TabBar(
-                    indicator: UnderlineTabIndicator(
-                      borderSide: BorderSide(width: 4, color: Color.fromARGB(255, 80, 82, 168)),
-                    ),
-                    labelPadding: EdgeInsets.all(8),
-                    isScrollable: true,
-                    tabs: [
-                    Text('Today',
-                        style: TextStyle(
-                            fontFamily: 'SFUI',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                            color: Colors.white,
-                            letterSpacing: 1)),
-                            
-                    Text('Next 7 Days',
-                        style: TextStyle(
-                            fontFamily: 'SFUI',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                            color: Colors.white,
-                            letterSpacing: 1))
-                  ]),
+                      indicator: UnderlineTabIndicator(
+                        borderSide: BorderSide(
+                            width: 4, color: Color.fromARGB(255, 80, 82, 168)),
+                      ),
+                      labelPadding: EdgeInsets.all(8),
+                      isScrollable: true,
+                      tabs: [
+                        Text('Today',
+                            style: TextStyle(
+                                fontFamily: 'SFUI',
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                                color: Colors.white,
+                                letterSpacing: 1)),
+                        Text('Next 7 Days',
+                            style: TextStyle(
+                                fontFamily: 'SFUI',
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                                color: Colors.white,
+                                letterSpacing: 1))
+                      ]),
                   const SizedBox(height: 20),
                   SizedBox(
                     height: 300,
-                    child: TabBarView(
-                      children: [
-                        Column(
-                          children: [
-                            SizedBox(
-                              height: 190,
-                              child: Forecast(weather.hourly),
-                            )
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            SizedBox(
-                              height: 190,
-                              child: ForecastDaily(weather.daily),
-                            )
-                          ],
-                        ),
-                      ]),
+                    child: TabBarView(children: [
+                      Column(
+                        children: [
+                          SizedBox(
+                            height: 190,
+                            child: Forecast(weather.hourly),
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          SizedBox(
+                            height: 190,
+                            child: ForecastDaily(weather.daily),
+                          )
+                        ],
+                      ),
+                    ]),
                   )
                 ],
               )),

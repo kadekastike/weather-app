@@ -15,7 +15,7 @@ class LocationLoaded extends LocationState {
   final String locationName;
 
   const LocationLoaded(this.locationName);
-  
+
   @override
   List<Object?> get props => [locationName];
 }
