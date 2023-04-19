@@ -24,20 +24,24 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff11103a),
-      body: BlocBuilder<WeatherBloc, WeatherState>(builder: (context, state) {
-        if (state is WeatherLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else if (state is WeatherHasData) {
-          final data = state.weatherEntity;
-          return CurrentWeather(data);
-        } else if (state is WeatherError) {
-          return Text(state.message);
-        } else {
-          return const Text('Failed');
-        }
-      }),
+      body: SingleChildScrollView(
+        child: BlocBuilder<WeatherBloc, WeatherState>(builder: (context, state) {
+          if (state is WeatherLoading) {
+            return Container(
+              alignment: Alignment.center,
+              height: MediaQuery.of(context).size.height,
+              child: const CircularProgressIndicator()
+              );
+          } else if (state is WeatherHasData) {
+            final data = state.weatherEntity;
+            return CurrentWeather(data);
+          } else if (state is WeatherError) {
+            return Text(state.message);
+          } else {
+            return const Text('Failed');
+          }
+        }),
+      ),
     );
   }
 }

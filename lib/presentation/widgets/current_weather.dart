@@ -1,9 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import '../../domain/entities/weather_entity.dart';
 import '../bloc/location/location_bloc.dart';
+import 'forecast.dart';
+import 'fourecast_daily.dart';
 
 class CurrentWeather extends StatelessWidget {
   final WeatherEntity weather;
@@ -13,7 +14,7 @@ class CurrentWeather extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.fromLTRB(16, 25, 16, 0),
       child: Column(
         children: [
           const SizedBox(
@@ -46,25 +47,25 @@ class CurrentWeather extends StatelessWidget {
                     Row(
                       children: [
                         const Text(
-                      'Today',
-                      style: TextStyle(
-                          fontFamily: 'SFUI',
-                          fontWeight: FontWeight.w600,
-                          fontSize: 22,
-                          color: Colors.white,
-                          letterSpacing: 1),
-                    ),
-                    const Spacer(),
-                    Text(
-                      DateFormat('EEE, d MMM').format(DateTime.now()), 
-                      style: const TextStyle(
-                          fontFamily: 'SFUI',
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                          color: Color(0xffbebdcb),
-                          height: 2,
-                          letterSpacing: 1),
-                    ),
+                          'Today',
+                          style: TextStyle(
+                              fontFamily: 'SFUI',
+                              fontWeight: FontWeight.w600,
+                              fontSize: 22,
+                              color: Colors.white,
+                              letterSpacing: 1),
+                        ),
+                        const Spacer(),
+                        Text(
+                          DateFormat('EEE, d MMM').format(DateTime.now()),
+                          style: const TextStyle(
+                              fontFamily: 'SFUI',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                              color: Color(0xffbebdcb),
+                              height: 2,
+                              letterSpacing: 1),
+                        ),
                       ],
                     ),
                     Row(
@@ -101,32 +102,88 @@ class CurrentWeather extends StatelessWidget {
                           color: Color(0xfff7c511),
                         ),
                         const SizedBox(width: 10),
-                        BlocBuilder<LocationBloc, LocationState>(builder: (context, state) {
+                        BlocBuilder<LocationBloc, LocationState>(
+                            builder: (context, state) {
                           if (state is LocationInitial) {
                             return const Center(
                               child: CircularProgressIndicator(),
                             );
                           } else if (state is LocationLoaded) {
-                            return Text(state.locationName, style: const TextStyle(
-                              fontFamily: 'SFUI',
-                              fontWeight: FontWeight.w400,
-                              fontSize: 14,
-                              color: Colors.white,
-                              letterSpacing: 1));
+                            return Text(state.locationName,
+                                style: const TextStyle(
+                                    fontFamily: 'SFUI',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                    letterSpacing: 1));
                           } else if (state is LocationError) {
                             return Text(state.errorMessage);
                           } else {
                             return const Text('failed');
                           }
                         })
-                        
                       ],
                     )
                   ],
                 ),
               ),
             ),
-          )
+          ),
+          DefaultTabController(
+              length: 2,
+              initialIndex: 0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 20),
+                  const TabBar(
+                    indicator: UnderlineTabIndicator(
+                      borderSide: BorderSide(width: 4, color: Color.fromARGB(255, 80, 82, 168)),
+                    ),
+                    labelPadding: EdgeInsets.all(8),
+                    isScrollable: true,
+                    tabs: [
+                    Text('Today',
+                        style: TextStyle(
+                            fontFamily: 'SFUI',
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                            color: Colors.white,
+                            letterSpacing: 1)),
+                            
+                    Text('Next 7 Days',
+                        style: TextStyle(
+                            fontFamily: 'SFUI',
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                            color: Colors.white,
+                            letterSpacing: 1))
+                  ]),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    height: 300,
+                    child: TabBarView(
+                      children: [
+                        Column(
+                          children: [
+                            SizedBox(
+                              height: 190,
+                              child: Forecast(weather.hourly),
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            SizedBox(
+                              height: 190,
+                              child: ForecastDaily(weather.daily),
+                            )
+                          ],
+                        ),
+                      ]),
+                  )
+                ],
+              )),
         ],
       ),
     );
