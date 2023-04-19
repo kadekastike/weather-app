@@ -8,8 +8,8 @@ abstract class WeatherEvent extends Equatable {
 }
 
 class LoadWeatherData extends WeatherEvent {
-  final double lat;
-  final double lon;
+  // final double lat;
+  // final double lon;
 
-  const LoadWeatherData(this.lat, this.lon);
+  const LoadWeatherData();
 }

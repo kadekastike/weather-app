@@ -1,11 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/foundation.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_app/domain/entities/current_weather_entity.dart';
 import 'package:weather_app/domain/entities/weather_entity.dart';
-import 'package:weather_app/presentation/bloc/weather_bloc.dart';
+import 'package:weather_app/presentation/bloc/location/location_bloc.dart';
+import 'package:weather_app/presentation/bloc/weather/weather_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,9 +18,10 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context
+     Future.microtask(() => context
         .read<WeatherBloc>()
-        .add(const LoadWeatherData(3.097676570299186, 101.60354834630813)));
+        .add(const LoadWeatherData()));
+      Future.microtask(() => context.read<LocationBloc>().add(FetchLocationName())); 
   }
 
   @override
@@ -137,15 +138,25 @@ class DetailContent extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Text(
-                          weather.timezone,
-                          style: const TextStyle(
+                        BlocBuilder<LocationBloc, LocationState>(builder: (context, state) {
+                          if (state is LocationInitial) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else if (state is LocationLoaded) {
+                            return Text(state.locationName, style: const TextStyle(
                               fontFamily: 'SFUI',
                               fontWeight: FontWeight.w400,
                               fontSize: 14,
                               color: Colors.white,
-                              letterSpacing: 1),
-                        )
+                              letterSpacing: 1));
+                          } else if (state is LocationError) {
+                            return Text(state.errorMessage);
+                          } else {
+                            return const Text('failed');
+                          }
+                        })
+                        
                       ],
                     )
                   ],

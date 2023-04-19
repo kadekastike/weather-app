@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app/presentation/bloc/weather_bloc.dart';
+import 'package:weather_app/presentation/bloc/location/location_bloc.dart';
+import 'package:weather_app/presentation/bloc/weather/weather_bloc.dart';
 import 'package:weather_app/presentation/pages/home_page.dart';
 import 'injection.dart' as di;
 
@@ -17,8 +18,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => di.locator<WeatherBloc>()
-        )
+          create: (_) => di.locator<WeatherBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<LocationBloc>()
+        ),
       ],
       child: const MaterialApp(
         title: "Weather",
