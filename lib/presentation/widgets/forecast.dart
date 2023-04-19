@@ -32,7 +32,7 @@ class Forecast extends StatelessWidget {
                       height: 100,
                          
                   ),
-                  Text(DateFormat('hh:mm a').format(DateTime.fromMillisecondsSinceEpoch(hourly[index].dt * 1000)).toString(),
+                  Text(DateFormat('hh a').format(DateTime.fromMillisecondsSinceEpoch(hourly[index].dt * 1000)).toString(),
                         style: const TextStyle(
                             fontFamily: 'SFUI',
                             fontWeight: FontWeight.w400,
