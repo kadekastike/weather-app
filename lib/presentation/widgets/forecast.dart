@@ -15,7 +15,7 @@ class Forecast extends StatelessWidget {
         itemCount: hourly.length < 24 ? hourly.length : 24,
         itemBuilder: (context, index) {
           return SizedBox(
-            width: 180,
+            width: 160,
             child: Card(
               color: const Color(0xff1b1c48),
               shape: const RoundedRectangleBorder(

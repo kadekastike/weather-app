@@ -15,7 +15,7 @@ class GetWeather {
       final position = await locationService.getCurrentLocation();
       final latitude = position.latitude;
       final longitude = position.longitude;
-      return await weatherRepository.getWeather(latitude, longitude);
+      return await weatherRepository.getWeather(-2.9880005190200722, 104.7397266056986);
     } catch (e) {
       throw Exception('Failed to get weather data');
     }

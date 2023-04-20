@@ -4,7 +4,6 @@ import 'package:weather_app/presentation/bloc/location/location_bloc.dart';
 import 'package:weather_app/presentation/bloc/weather/weather_bloc.dart';
 import 'package:weather_app/presentation/pages/home_page.dart';
 import 'injection.dart' as di;
-
 void main() {
   di.init();
   runApp(const MyApp());

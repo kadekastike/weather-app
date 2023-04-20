@@ -15,7 +15,7 @@ class ForecastDaily extends StatelessWidget {
         itemCount: daily.length,
         itemBuilder: (context, index) {
           return SizedBox(
-            width: 180,
+            width: 160,
             child: Card(
               color: const Color(0xff1b1c48),
               shape: const RoundedRectangleBorder(

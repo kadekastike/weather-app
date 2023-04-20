@@ -46,6 +46,7 @@ dependencies:
   flutter_bloc: ^8.1.2
   geolocator: ^9.0.2
   geocoding: ^2.1.0
+  fl_chart: ^0.62.0
 
 dev_dependencies:
   flutter_test:

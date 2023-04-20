@@ -5,6 +5,7 @@ import '../../domain/entities/weather_entity.dart';
 import '../bloc/location/location_bloc.dart';
 import 'forecast.dart';
 import 'fourecast_daily.dart';
+import 'humidity_chart.dart';
 
 class CurrentWeather extends StatelessWidget {
   final WeatherEntity weather;
@@ -13,6 +14,16 @@ class CurrentWeather extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<double> hourlyHumidityData = [];
+    List<int> times = [];
+
+    for(var i=0; i < 6; i++) {
+      double humidity = weather.hourly[i].humidity.toDouble();
+      hourlyHumidityData.add(humidity);
+      int time = weather.hourly[i].dt;
+      times.add(time);
+    }
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 25, 16, 0),
       child: Column(
@@ -161,20 +172,33 @@ class CurrentWeather extends StatelessWidget {
                       ]),
                   const SizedBox(height: 20),
                   SizedBox(
-                    height: 300,
+                    height: 435,
                     child: TabBarView(children: [
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            height: 190,
+                            height: 180,
                             child: Forecast(weather.hourly),
-                          )
+                          ),
+                          const SizedBox(height: 15),
+                          const Text('Humidity Data',
+                            style: TextStyle(
+                                fontFamily: 'SFUI',
+                                fontWeight: FontWeight.w400,
+                                fontSize: 18,
+                                color: Colors.white,
+                                letterSpacing: 1)),
+                          const SizedBox(height: 15),
+                          SizedBox(
+                            height: 200,
+                            child: HumidityChart(hourlyHumidityData: hourlyHumidityData, times: times,)),
                         ],
                       ),
                       Column(
                         children: [
                           SizedBox(
-                            height: 190,
+                            height: 180,
                             child: ForecastDaily(weather.daily),
                           )
                         ],
