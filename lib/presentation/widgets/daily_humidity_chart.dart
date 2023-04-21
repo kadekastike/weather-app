@@ -2,18 +2,16 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../common/app_colors.dart';
-import '../../domain/entities/weather_entity.dart';
 
 class DailyHumidityChart extends StatelessWidget {
- 
   final List<double> dailyHumidityData;
   final List<int> dates;
 
-  const DailyHumidityChart({ required this.dailyHumidityData, required this.dates});
+  const DailyHumidityChart(
+      {required this.dailyHumidityData, required this.dates});
 
   @override
   Widget build(BuildContext context) {
-
     List<FlSpot> dataSpots = dailyHumidityData.asMap().entries.map((entry) {
       double x = entry.key.toDouble(); // Use index as x value
       double y = entry.value; // Use humidity data as y value
@@ -24,15 +22,14 @@ class DailyHumidityChart extends StatelessWidget {
       LineChartData(
         lineBarsData: [
           LineChartBarData(
-            isCurved: true,
-            color: const Color(0xfff7c511),
-            barWidth: 8,
-            isStrokeCapRound: true,
-            dotData: FlDotData(show: false),
-            belowBarData: BarAreaData(show: false),
-            spots: dataSpots
-          )
-        ], 
+              isCurved: true,
+              color: const Color(0xfff7c511),
+              barWidth: 8,
+              isStrokeCapRound: true,
+              dotData: FlDotData(show: false),
+              belowBarData: BarAreaData(show: false),
+              spots: dataSpots)
+        ],
         titlesData: humidityTitlesData1,
         gridData: gridData,
         borderData: borderData,
@@ -41,7 +38,6 @@ class DailyHumidityChart extends StatelessWidget {
         maxY: 100,
         minY: 0,
       ),
-      
       swapAnimationDuration: const Duration(milliseconds: 250),
     );
   }
@@ -50,7 +46,7 @@ class DailyHumidityChart extends StatelessWidget {
         bottomTitles: AxisTitles(
           sideTitles: bottomTitles,
         ),
-         rightTitles: AxisTitles(
+        rightTitles: AxisTitles(
           sideTitles: SideTitles(showTitles: false),
         ),
         topTitles: AxisTitles(
@@ -61,13 +57,9 @@ class DailyHumidityChart extends StatelessWidget {
         ),
       );
 
-
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
-      fontWeight: FontWeight.normal,
-      fontSize: 10,
-      color: Colors.white
-    );
+        fontWeight: FontWeight.normal, fontSize: 10, color: Colors.white);
     return Text('${value.toInt()}%', style: style);
   }
 
@@ -80,14 +72,17 @@ class DailyHumidityChart extends StatelessWidget {
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
-      fontWeight: FontWeight.normal,
-      fontSize: 10,
-      color: Colors.white
-    );
+        fontWeight: FontWeight.normal, fontSize: 10, color: Colors.white);
     Widget text;
     int index = value.toInt();
     if (index >= 0 && index < dates.length) {
-      text = Text(DateFormat('EEE, d MMM').format(DateTime.fromMillisecondsSinceEpoch(dates[index] * 1000)).toString(), style: style, textAlign: TextAlign.center,);
+      text = Text(
+        DateFormat('EEE, d MMM')
+            .format(DateTime.fromMillisecondsSinceEpoch(dates[index] * 1000))
+            .toString(),
+        style: style,
+        textAlign: TextAlign.center,
+      );
     } else {
       text = const Text('');
     }
@@ -118,5 +113,4 @@ class DailyHumidityChart extends StatelessWidget {
           top: const BorderSide(color: Colors.transparent),
         ),
       );
-
 }

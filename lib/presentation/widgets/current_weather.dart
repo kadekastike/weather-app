@@ -5,7 +5,6 @@ import '../../domain/entities/weather_entity.dart';
 import '../bloc/location/location_bloc.dart';
 import 'daily_humidity_chart.dart';
 import 'forecast.dart';
-import 'fourecast_daily.dart';
 import 'humidity_chart.dart';
 
 class CurrentWeather extends StatelessWidget {
@@ -20,7 +19,7 @@ class CurrentWeather extends StatelessWidget {
     List<double> dailyHumidityData = [];
     List<int> dates = [];
 
-    for(var i=0; i < 6; i++) {
+    for (var i = 0; i < 6; i++) {
       double humidity = weather.hourly[i].humidity.toDouble();
       hourlyHumidityData.add(humidity);
       int time = weather.hourly[i].dt;
@@ -187,20 +186,30 @@ class CurrentWeather extends StatelessWidget {
                         children: [
                           SizedBox(
                             height: 180,
-                            child: Forecast(weather.hourly),
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              itemCount: weather.hourly.length < 24 ? weather.hourly.length : 24,
+                              itemBuilder: ((context, index) {
+                                final hourly = weather.hourly[index];
+                                return Forecast(icon: hourly.weather[0].icon, dateTime: hourly.dt, temp: hourly.temp, timeFormat: 'hh a');
+                            }))
                           ),
                           const SizedBox(height: 15),
                           const Text('Hourly Humidity Data',
-                            style: TextStyle(
-                                fontFamily: 'SFUI',
-                                fontWeight: FontWeight.w400,
-                                fontSize: 18,
-                                color: Colors.white,
-                                letterSpacing: 1)),
+                              style: TextStyle(
+                                  fontFamily: 'SFUI',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                  letterSpacing: 1)),
                           const SizedBox(height: 15),
                           SizedBox(
-                            height: 200,
-                            child: HumidityChart(hourlyHumidityData: hourlyHumidityData, times: times,)),
+                              height: 200,
+                              child: HumidityChart(
+                                hourlyHumidityData: hourlyHumidityData,
+                                times: times,
+                              )),
                         ],
                       ),
                       Column(
@@ -208,21 +217,30 @@ class CurrentWeather extends StatelessWidget {
                         children: [
                           SizedBox(
                             height: 180,
-                            child: ForecastDaily(weather.daily),
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              itemCount: weather.daily.length,
+                              itemBuilder: ((context, index) {
+                                final daily = weather.daily[index];
+                                return Forecast(icon: daily.weather[0].icon, dateTime: daily.dt, temp: daily.temp.max, timeFormat: 'EEE, d MMM');
+                            }))
                           ),
                           const SizedBox(height: 15),
                           const Text('Daily Humidity Data',
-                            style: TextStyle(
-                                fontFamily: 'SFUI',
-                                fontWeight: FontWeight.w400,
-                                fontSize: 18,
-                                color: Colors.white,
-                                letterSpacing: 1)),
+                              style: TextStyle(
+                                  fontFamily: 'SFUI',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                  letterSpacing: 1)),
                           const SizedBox(height: 15),
                           SizedBox(
-                            height: 200,
-                            child: DailyHumidityChart(dailyHumidityData: dailyHumidityData, dates: dates,)),
-                        
+                              height: 200,
+                              child: DailyHumidityChart(
+                                dailyHumidityData: dailyHumidityData,
+                                dates: dates,
+                              )),
                         ],
                       ),
                     ]),
