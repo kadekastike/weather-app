@@ -5,4 +5,4 @@
 
 ## Getting Started
 
-This is a Flutter Project for displaying current weather for user current location.
+This is a Flutter Project for displaying current weather and weather forecast based on user current location.
