@@ -48,10 +48,10 @@ class LocationService {
           return placemark.subLocality!;
         }
       } else {
-        throw Exception('Failed to get location');
+        throw Exception('Failed to get location name');
       }
     } catch (e) {
-      throw Exception('Failed to get  name');
+      throw Exception('Failed to get location name');
     }
   }
 }
