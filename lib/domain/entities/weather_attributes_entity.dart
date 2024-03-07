@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class WeatherMain extends Equatable {
-  WeatherMain({
+  const WeatherMain({
     required this.id,
     required this.main,
     required this.description,

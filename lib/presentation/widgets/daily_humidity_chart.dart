@@ -8,7 +8,7 @@ class DailyHumidityChart extends StatelessWidget {
   final List<int> dates;
 
   const DailyHumidityChart(
-      {required this.dailyHumidityData, required this.dates});
+      {super.key, required this.dailyHumidityData, required this.dates});
 
   @override
   Widget build(BuildContext context) {

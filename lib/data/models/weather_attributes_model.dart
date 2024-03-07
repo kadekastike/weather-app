@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import '../../domain/entities/weather_attributes_entity.dart';
 
 class Weather extends Equatable {
-  Weather({
+  const Weather({
     required this.id,
     required this.main,
     required this.description,

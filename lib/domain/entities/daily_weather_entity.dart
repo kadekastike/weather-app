@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'weather_attributes_entity.dart';
 
 class DailyEntity extends Equatable {
-  DailyEntity({
+  const DailyEntity({
     required this.dt,
     required this.sunrise,
     required this.sunset,
@@ -66,7 +66,7 @@ class DailyEntity extends Equatable {
 }
 
 class FeelsLikeEntity extends Equatable {
-  FeelsLikeEntity({
+  const FeelsLikeEntity({
     required this.day,
     required this.night,
     required this.eve,
@@ -83,7 +83,7 @@ class FeelsLikeEntity extends Equatable {
 }
 
 class TempEntity extends Equatable {
-  TempEntity({
+  const TempEntity({
     required this.day,
     required this.min,
     required this.max,

@@ -8,7 +8,7 @@ class Forecast extends StatelessWidget {
   final String timeFormat;
 
   const Forecast(
-      {required this.icon,
+      {super.key, required this.icon,
       required this.dateTime,
       required this.temp,
       required this.timeFormat});

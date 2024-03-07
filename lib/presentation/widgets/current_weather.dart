@@ -10,7 +10,7 @@ import 'humidity_chart.dart';
 class CurrentWeather extends StatelessWidget {
   final WeatherEntity weather;
 
-  const CurrentWeather(this.weather);
+  const CurrentWeather(this.weather, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -205,7 +205,7 @@ class CurrentWeather extends StatelessWidget {
                                   letterSpacing: 1)),
                           const SizedBox(height: 15),
                           SizedBox(
-                              height: 200,
+                              height: 195,
                               child: HumidityChart(
                                 hourlyHumidityData: hourlyHumidityData,
                                 times: times,
@@ -236,7 +236,7 @@ class CurrentWeather extends StatelessWidget {
                                   letterSpacing: 1)),
                           const SizedBox(height: 15),
                           SizedBox(
-                              height: 200,
+                              height: 195,
                               child: DailyHumidityChart(
                                 dailyHumidityData: dailyHumidityData,
                                 dates: dates,

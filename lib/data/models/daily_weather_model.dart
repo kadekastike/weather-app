@@ -1,10 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:weather_app/data/models/weather_attributes_model.dart';
 import '../../domain/entities/daily_weather_entity.dart';
-import '../../domain/entities/weather_entity.dart';
 
 class Daily extends Equatable {
-  Daily({
+  const Daily({
     required this.dt,
     required this.sunrise,
     required this.sunset,

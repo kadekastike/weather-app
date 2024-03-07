@@ -7,7 +7,7 @@ class HumidityChart extends StatelessWidget {
   final List<double> hourlyHumidityData;
   final List<int> times;
 
-  const HumidityChart({ required this.hourlyHumidityData, required this.times});
+  const HumidityChart({super.key,  required this.hourlyHumidityData, required this.times});
 
   @override
   Widget build(BuildContext context) {

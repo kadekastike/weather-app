@@ -3,7 +3,7 @@ import 'package:weather_app/data/models/weather_attributes_model.dart';
 import '../../domain/entities/current_weather_entity.dart';
 
 class Current extends Equatable {
-  Current({
+  const Current({
     required this.dt,
     this.sunrise,
     this.sunset,

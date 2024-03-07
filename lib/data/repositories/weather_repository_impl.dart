@@ -17,9 +17,9 @@ class WeatherRepositoryImpl implements WeatherRepository {
       final result = await weatherRemoteDataSource.getWeather(lat, lon);
       return Right(mapWeatherModeltoEntity(result));
     } on ServerException {
-      return Left(ServerFailure(''));
+      return const Left(ServerFailure(''));
     } on ConnectionFailure {
-      return Left(ConnectionFailure(''));
+      return const Left(ConnectionFailure(''));
     }
   }
 }

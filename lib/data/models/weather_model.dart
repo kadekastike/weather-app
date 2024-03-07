@@ -4,7 +4,7 @@ import 'current_weather_model.dart';
 import 'daily_weather_model.dart';
 
 class WeatherModel extends Equatable {
-  WeatherModel({
+  const WeatherModel({
     required this.lat,
     required this.lon,
     required this.timezone,
