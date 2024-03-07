@@ -155,9 +155,12 @@ class CurrentWeather extends StatelessWidget {
                 children: [
                   const SizedBox(height: 20),
                   const TabBar(
+                    dividerColor: Colors.transparent,
                       indicator: UnderlineTabIndicator(
                         borderSide: BorderSide(
-                            width: 4, color: Color.fromARGB(255, 80, 82, 168)),
+                            width: 4, 
+                            color: Color.fromARGB(255, 80, 82, 168),
+                            ),
                       ),
                       labelPadding: EdgeInsets.all(8),
                       isScrollable: true,
