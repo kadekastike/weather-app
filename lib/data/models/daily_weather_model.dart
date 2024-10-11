@@ -108,6 +108,7 @@ class Daily extends Equatable {
       ];
 }
 
+// ignore: must_be_immutable
 class FeelsLike extends Equatable {
   FeelsLike({
     required this.day,
@@ -139,6 +140,7 @@ class FeelsLike extends Equatable {
   List<Object?> get props => [day, night, eve, morn];
 }
 
+// ignore: must_be_immutable
 class Temp extends Equatable {
   Temp({
     required this.day,
